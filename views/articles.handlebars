@@ -1,5 +1,10 @@
 <h1>Hello world</h1>
-
+{{#each article}}
+<div>
+    <p>{{this.title}}</p>
+    <a href="https://www.fantasyflightgames.com{{this.link}}">Click here to read the article</a>
+</div>
+{{/each}}
 
 
 <script src="../assets/js/logic.js"></script>

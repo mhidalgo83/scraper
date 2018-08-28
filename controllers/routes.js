@@ -11,20 +11,36 @@ module.exports = function (app) {
     });
 
     //Route for scrape
-    app.get("/articles", function (req, res) {
-        request("https://www.fantasyflightgames.com/en/index/", function(err, res, html){
+    app.get("/scrape", function (req, res) {
+        request("https://www.fantasyflightgames.com/en/index/", function (err, res, html) {
             var $ = cheerio.load(html);
-            
-            $("span a").each(function(i, element){
+
+            //searches the website for <span class="title"> to pull title and link...
+            $("span.title").each(function (i, element) {
                 var result = {};
                 result.title = $(this).text();
-                console.log(result);
-                result.link = $(this).attr("href");
-            })
-            
+                result.link = $(this).children().attr("href");
+
+                //This creates our result
+                db.Article.create(result)
+                    .then(function (dbArticle) {
+                        console.log(dbArticle)
+                    })
+                    .catch(function (err) {
+                        return res.json(err)
+                    })
+            });
         })
-        res.render("articles");
+        res.render("scrape");
     });
 
+    //Route for articles that have been scraped...
+    app.get("/articles", function (req, res) {
+        db.Article.find({}).then(function (data) {
+            res.render("articles", {
+                article: data
+            });
+        })
+    })
 }
 
