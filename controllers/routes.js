@@ -15,20 +15,18 @@ module.exports = function (app) {
         request("https://www.fantasyflightgames.com/en/index/", function (err, res, html) {
             var $ = cheerio.load(html);
 
-            //searches the website for <span class="title"> to pull title and link...
-            $("span.title").each(function (i, element) {
+            //searches the website for each span with the class of title and link...
+            $("div.blog-post-preview").each(function (i, element) {
                 var result = {};
-                result.title = $(this).text();
-                result.link = $(this).children().attr("href");
-
+                result.title = $(this).children("span").text();
+                result.link = $("span").children("a").attr("href");
+                result.description = $(this).children("p").text();
+                console.log(result);
                 //This creates our result
                 db.Article.create(result)
                     .then(function (dbArticle) {
                         console.log(dbArticle)
-                    })
-                    .catch(function (err) {
-                        return res.json(err)
-                    })
+                    });
             });
         })
         res.render("scrape");
