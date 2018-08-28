@@ -15,13 +15,16 @@ module.exports = function (app) {
         request("https://www.fantasyflightgames.com/en/index/", function (err, res, html) {
             var $ = cheerio.load(html);
 
-            //searches the website for each span with the class of title and link...
+            //searches the website for each div with the class of blog-post-preview...
             $("div.blog-post-preview").each(function (i, element) {
+                
+                //Saves the object in result...
                 var result = {};
                 result.title = $(this).children("span").text();
-                result.link = $("span").children("a").attr("href");
+                result.link = $(this).find("span.title").children("a").attr("href");
                 result.description = $(this).children("p").text();
                 console.log(result);
+
                 //This creates our result
                 db.Article.create(result)
                     .then(function (dbArticle) {
@@ -38,6 +41,12 @@ module.exports = function (app) {
             res.render("articles", {
                 article: data
             });
+        })
+    });
+
+    app.post("/articles/:id", function(req, res){
+        db.Note.create(req.body).then(function(data){
+            return db.Article.findOneAndUpdate({_id: req.params.id}, {note: data._id}, {new: true})
         })
     })
 }

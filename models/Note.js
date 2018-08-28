@@ -5,13 +5,13 @@ var Schema = mongoose.Schema;
 
 // Note object for our schema
 var NoteSchema = new Schema({
-  // `title` is of type String
+  //Title of note...
   title: String,
-  // `body` is of type String
+  //Body of note...
   body: String
 });
 
-// This creates our model from the above schema, using mongoose's model method
+//Creates the model...
 var Note = mongoose.model("Note", NoteSchema);
 
 // Export the Note model
