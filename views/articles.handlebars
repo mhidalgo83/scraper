@@ -3,37 +3,39 @@
     <div class="card-body">
         <h1 class="card-title">{{this.title}}</h1>
         <p class="card-subtitle mb-2 text-muted">{{this.description}}</p>
-        <a href="https://www.fantasyflightgames.com{{this.link}}" class="card-link">Article</a>
-        <a class="card-link" data-toggle="modal" data-target="#commentModal">Add a Comment</a>
-        <a href="#" class="card-link">Comments</a>
+        <a href="https://www.fantasyflightgames.com{{this.link}}" class="card-link" target="_blank">Article</a>
 
-        <!-- Modal -->
-       <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                            <div class="form-group">
-                                <label for="exampleFormControlInput1">Title</label>
-                                <input type="text" class="form-control" id="title" placeholder="Title">
-                            </div>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Comment</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Leave your comment here"></textarea>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary submit" data-id ="{{this._id}}">Submit</button>
-                    </div>
+        <!-- This targets the "Add a comment" modal-->
+        <a href="#" class="card-link" data-toggle="modal" data-target="#id{{this._id}}">Add a Comment</a>
+    </div>
+</div>
+
+<!-- "Add a comment" Modal -->
+<div class="modal fade" id="id{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Title</label>
+                    <input type="text" class="form-control" id="title" placeholder="Title">
                 </div>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="noteBody">Comment</label>
+                        <textarea class="form-control" id="body" rows="3" placeholder="Leave your comment here"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+                <button type="button" class="btn btn-primary submit" data-id="{{this._id}}" data-dismiss="modal">Submit</button>
             </div>
         </div>
     </div>
 </div>
+
 {{/each}}
 
 <script src="../assets/js/logic.js"></script>

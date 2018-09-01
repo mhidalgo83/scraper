@@ -13,7 +13,8 @@ var ArticleSchema = new Schema({
   //Link to article...
   link: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   // Description of article...
   description: {
@@ -21,10 +22,10 @@ var ArticleSchema = new Schema({
       required: true
   },
   // This allows us to populate the Article with an associated Note
-  note: {
+  note: [{
     type: Schema.Types.ObjectId,
     ref: "Note"
-  }
+  }]
 });
 
 //Creates the model...

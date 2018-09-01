@@ -17,7 +17,7 @@ module.exports = function (app) {
 
             //searches the website for each div with the class of blog-post-preview...
             $("div.blog-post-preview").each(function (i, element) {
-                
+
                 //Saves the object in result...
                 var result = {};
                 result.title = $(this).children("span").text();
@@ -29,6 +29,8 @@ module.exports = function (app) {
                 db.Article.create(result)
                     .then(function (dbArticle) {
                         console.log(dbArticle)
+                    }).catch(function(err){
+                        console.log(err);
                     });
             });
         })
@@ -44,10 +46,29 @@ module.exports = function (app) {
         })
     });
 
-    app.post("/articles/:id", function(req, res){
-        db.Note.create(req.body).then(function(data){
-            return db.Article.findOneAndUpdate({_id: req.params.id}, {note: data._id}, {new: true})
-        })
-    })
+
+    // Route for saving/updating an Article's associated Note
+    app.post("/articles/:id", function (req, res) {
+        // Create a new note and pass the req.body to the entry
+        db.Note.create(req.body)
+            .then(function (dbNote) {
+                return db.Article.findOneAndUpdate({ _id: req.params.id }, {$push: { note: dbNote._id }}, { new: true });
+            })
+            .then(function (dbArticle) {
+                res.json(dbArticle);
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+    });
+
+    app.get("/articles/:id", function (req, res) {
+        db.Articles / findOne({ _id: req.params.id }).populate("note")
+            .then(function (data) {
+                res.render("articles", {
+                    notes: data
+                });
+            });
+    });
 }
 
