@@ -39,7 +39,8 @@ module.exports = function (app) {
 
     //Route for articles that have been scraped...
     app.get("/articles", function (req, res) {
-        db.Article.find({}).then(function (data) {
+        db.Article.find({}).populate("note").then(function (data) {
+            console.log(data);
             res.render("articles", {
                 article: data
             });
@@ -59,17 +60,6 @@ module.exports = function (app) {
             })
             .catch(function (err) {
                 res.json(err);
-            });
-    });
-
-    //Get route for notes associated with article
-    app.get("/articles/:id", function (req, res) {
-        db.Article.findOne({ _id: req.params.id }).populate("note")
-            .then(function (data) {
-                res.render("articles", {
-                    data: data,
-                });
-                console.log(data)
             });
     });
 }
