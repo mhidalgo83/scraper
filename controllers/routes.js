@@ -62,12 +62,14 @@ module.exports = function (app) {
             });
     });
 
+    //Get route for notes associated with article
     app.get("/articles/:id", function (req, res) {
-        db.Articles / findOne({ _id: req.params.id }).populate("note")
+        db.Article.findOne({ _id: req.params.id }).populate("note")
             .then(function (data) {
                 res.render("articles", {
-                    notes: data
+                    data: data,
                 });
+                console.log(data)
             });
     });
 }

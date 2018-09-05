@@ -7,6 +7,12 @@
 
         <!-- This targets the "Add a comment" modal-->
         <a href="#" class="card-link" data-toggle="modal" data-target="#id{{this._id}}">Add a Comment</a>
+
+        <!--This targets the "Comments" card-->
+        <a class="comments" href="/articles/{{this.id}}" data-toggle="collapse" data-target="#comment{{this.id}}" aria-expanded="false"
+            aria-controls="collapseExample" data-id="{{this.id}}">
+            Comments
+        </a>
     </div>
 </div>
 
@@ -36,6 +42,25 @@
     </div>
 </div>
 
+<!--Comments go here, but aren't rendering from the get route -->
+<div class="collapse" id="comment{{this.id}}">
+    {{#each data}}
+    <div class="card card-body">
+        <p id="noteTitle">
+            {{data}}
+        </p>
+        <p id="noteBody">
+            {{this}}
+        </p>
+    </div>
+    {{/each}}
+</div>
 {{/each}}
+
+
+
+
+
+
 
 <script src="../assets/js/logic.js"></script>
