@@ -6,7 +6,7 @@ var bodyParser = require("body-parser");
 var app = express();
 
 //Port being used...
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 // Use body-parser for handling form submissions...
 app.use(bodyParser.urlencoded({ extended: true }));
