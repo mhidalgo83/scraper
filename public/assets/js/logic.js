@@ -13,9 +13,10 @@ $(document).on("click", "#submit", function () {
             body: $("#body" + thisId).val().trim()
         },
     }).then(function(data) {
-        console.log(data)
+        console.log(data);
+        location.reload();
     });
-    location.reload();
+    
 });
 
 //Close button in modal...
