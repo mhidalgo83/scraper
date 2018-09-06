@@ -44,12 +44,10 @@ module.exports = function (app) {
             res.render("articles", {
                 article: data
             });
-            
-        })
+        });
     });
 
-
-    // Route for saving/updating an Article's associated Note
+    // Route for saving/updating an Article's associated Note...
     app.post("/articles/:id", function (req, res) {
         // Create a new note and pass the req.body to the entry
         db.Note.create(req.body)
@@ -64,6 +62,7 @@ module.exports = function (app) {
             });
     });
 
+    //Delete route to remove notes from the database...
     app.delete("/notes/:id", function (req, res){
         db.Note.deleteOne({_id: req.params.id})
         .then(function(data){

@@ -1,6 +1,8 @@
 {{#each article}}
 <div class="card">
     <div class="card-body">
+        
+        <!-- Article link, title, and description for each article-->
         <h1 class="card-title">{{this.title}}</h1>
         <p class="card-subtitle mb-2 text-muted">{{this.description}}</p>
         <a href="https://www.fantasyflightgames.com{{this.link}}" class="card-link" target="_blank">Article</a>
@@ -8,11 +10,7 @@
         <!-- This targets the "Add a comment" modal-->
         <a href="#" class="card-link" data-toggle="modal" data-target="#id{{this._id}}">Add a Comment</a>
 
-        <!--This targets the "Comments" card
-        <a class="comments" href="/articles/{{this.id}}" data-toggle="collapse" data-target="#comment{{this.id}}" aria-expanded="false"
-            aria-controls="collapseExample" data-id="{{this.id}}">
-            Comments
-        </a>-->
+        <!--Comments accordion -->
         <div class="accordion" id="commentCollapsible">
             <div class="card">
                 <div class="card-header" id="comment">
@@ -39,7 +37,7 @@
                                 <i class="fa fa-trash" aria-hidden="true" id="delete" data-id="{{this._id}}"></i>
                             </div>
                         </div>
-                        <br>
+                        <br> 
                         {{/each}}
                     </div>
                 </div>
@@ -74,32 +72,6 @@
         </div>
     </div>
 </div>
-
-<!--Comments section
-<div class="collapse" id="comment{{this.id}}">
-    {{#each note}}
-    <div class="card card-body" id="cards">
-        <div class="row">
-            <div class="col-sm-10">
-                <h3 id="noteTitle">
-                    Title: {{title}}
-                </h3>
-                <h3 id="noteBody">
-                    Comment: {{body}}
-                </h3>
-            </div>
-            <div class="col-sm-2">
-                <i class="fa fa-trash" aria-hidden="true" id="delete" data-id="{{this._id}}"></i>
-            </div>
-        </div>
-    </div>
-    {{/each}}-->
-</div>
 {{/each}}
-
-
-
-
-
 
 <script src="../assets/js/logic.js"></script>
