@@ -8,11 +8,44 @@
         <!-- This targets the "Add a comment" modal-->
         <a href="#" class="card-link" data-toggle="modal" data-target="#id{{this._id}}">Add a Comment</a>
 
-        <!--This targets the "Comments" card-->
+        <!--This targets the "Comments" card
         <a class="comments" href="/articles/{{this.id}}" data-toggle="collapse" data-target="#comment{{this.id}}" aria-expanded="false"
             aria-controls="collapseExample" data-id="{{this.id}}">
             Comments
-        </a>
+        </a>-->
+        <div class="accordion" id="commentCollapsible">
+            <div class="card">
+                <div class="card-header" id="comment">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#comment{{this.id}}" aria-expanded="false"
+                            aria-controls="collapseThree">
+                            <h4>Comments</h4>
+                        </button>
+                    </h5>
+                </div>
+                <div id="comment{{this.id}}" class="collapse" aria-labelledby="comment" data-parent="#commentCollapsible">
+                    <div class="card-body">
+                        {{#each note}}
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <h3 id="noteTitle">
+                                    Title: {{title}}
+                                </h3>
+                                <h3 id="noteBody">
+                                    Comment: {{body}}
+                                </h3>
+                            </div>
+                            <div class="col-sm-2">
+                                <i class="fa fa-trash" aria-hidden="true" id="delete" data-id="{{this._id}}"></i>
+                            </div>
+                        </div>
+                        <br>
+                        {{/each}}
+                    </div>
+                </div>
+                <span class="border-bottom"></span>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -23,40 +56,46 @@
             <div class="modal-header">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Title</label>
-                    <input type="text" class="form-control" id="title" placeholder="Title">
+                    <input id="title{{this._id}}" type="text" class="form-control title" placeholder="Title">
                 </div>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="form-group">
                         <label for="noteBody">Comment</label>
-                        <textarea class="form-control" id="body" rows="3" placeholder="Leave your comment here"></textarea>
+                        <textarea id="body{{this._id}}" class="form-control" rows="3" placeholder="Leave your comment here"></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
-                <button type="button" class="btn btn-primary submit" data-id="{{this._id}}" data-dismiss="modal">Submit</button>
+                <button type="button" class="btn btn-primary" data-id="{{this._id}}" data-dismiss="modal" id="submit">Submit</button>
             </div>
         </div>
     </div>
 </div>
 
-<!--Comments go here, but aren't rendering from the get route -->
+<!--Comments section
 <div class="collapse" id="comment{{this.id}}">
     {{#each note}}
-    <div class="card card-body">
-        <p id="noteTitle">
-            {{title}}
-        </p>
-        <p id="noteBody">
-            {{body}}
-        </p>
+    <div class="card card-body" id="cards">
+        <div class="row">
+            <div class="col-sm-10">
+                <h3 id="noteTitle">
+                    Title: {{title}}
+                </h3>
+                <h3 id="noteBody">
+                    Comment: {{body}}
+                </h3>
+            </div>
+            <div class="col-sm-2">
+                <i class="fa fa-trash" aria-hidden="true" id="delete" data-id="{{this._id}}"></i>
+            </div>
+        </div>
     </div>
-    {{/each}}
+    {{/each}}-->
 </div>
 {{/each}}
-
 
 
 

@@ -40,10 +40,11 @@ module.exports = function (app) {
     //Route for articles that have been scraped...
     app.get("/articles", function (req, res) {
         db.Article.find({}).populate("note").then(function (data) {
-            console.log(data);
+            console.log(data[0]);
             res.render("articles", {
                 article: data
             });
+            
         })
     });
 
@@ -62,5 +63,14 @@ module.exports = function (app) {
                 res.json(err);
             });
     });
-}
+
+    app.delete("/notes/:id", function (req, res){
+        db.Note.deleteOne({_id: req.params.id})
+        .then(function(data){
+            res.json(data);
+        }).catch(function(err){
+            res.json(err);
+        });
+    });
+};
 

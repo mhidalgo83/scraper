@@ -1,4 +1,7 @@
 body {
+    background: url("../images/background.jpg");
+    background-attachment: fixed;
+    background-size: cover;
     margin: 20px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 24px;
@@ -8,6 +11,14 @@ body {
     margin: 20px;
 }
 
-#title {
+.title {
     width: 468px;
+}
+
+#cards {
+    width: 60%;
+}
+
+#delete {
+    padding-top: 20%;
 }
